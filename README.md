@@ -27,10 +27,7 @@ Eshell V10.6.1  (abort with ^G)
 4> rover:new(rover4, {0,3}).
 {ok,<0.143.0>}
 5> rover:new(rover5, {0,3}).
-{error,{occupied,{child,undefined,rover5,
-                        {rover,start_link,[{0,3}]},
-                        permanent,5000,worker,
-                        [rover]}}}
+{error,occupied}
 6> rover:new(rover5, {0,4}).
 {ok,<0.148.0>}
 7> sys:get_state(grid).

@@ -39,9 +39,13 @@
 %%%===================================================================
 
 new(Name, Location) ->
-  supervisor:start_child(mars_rover_sup, #{ id => Name
-                                          , start => {rover, start_link, [Location]}
-                                          }).
+  ChildSpec = #{ id => Name
+               , start => {rover, start_link, [Location]}
+               },
+  case supervisor:start_child(mars_rover_sup, ChildSpec) of
+    {ok, Pid}                   -> {ok, Pid};
+    {error,{Reason,_ChildSpec}} -> {error, Reason}
+  end.
 
 start_link(Location={X, Y}) when X =< ?X_MAX
                          andalso Y =< ?Y_MAX
