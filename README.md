@@ -1,7 +1,26 @@
 mars_rover
 =====
 
-An OTP application
+An OTP application. Mars rovers that move on a 10x10 canvas, controlled by authorised owners, not allowed to run into each other.
+
+OTP supervision tree:
+```
+└── mars_rover_app
+    └── mars_rover_sup
+        ├── grid
+        └── rover
+```
+APIs:
+
+```erlang
+{ok, Pid} = rover:new(Id, {X,Y}),
+ok = rover:assume_control(Pid),
+{ok, {X, Y}} = rover:north(Pid),
+{ok, {X, Y}} = rover:south(Pid),
+{ok, {X, Y}} = rover:east(Pid),
+{ok, {X, Y}} = rover:west(Pid).
+```
+
 
 Build
 -----
